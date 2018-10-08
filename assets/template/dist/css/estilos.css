@@ -1,0 +1,98 @@
+*{
+    
+    margin: 0;
+    padding: 0;
+    }
+@font-face{
+font-family: 'Philosopher', sans-serif;
+    
+        src: url("../font-awesome/fonts/Philosopher-Bold");
+
+
+}
+body{
+    
+    min-width: 100%;
+    align-items: center;
+}
+#letra{
+color:white;
+}
+#letra2{
+color:white;
+}
+nav.navbar{
+    background-color: #CB0101;
+    font-family: 'Philosopher', sans-serif;
+    font-size: 16px;
+}
+.titulo{
+ padding-left: 15px;
+    font-family: 'Philosopher', sans-serif;
+    font-size: 25px;
+    color: #fff;    
+
+}
+.titulo2{
+    font-family: 'Philosopher', sans-serif;
+    font-size: 40px;
+    padding: none;
+    color: black; 
+}
+.dropdown-menu li a{
+    color: black; 
+}
+#lista a{
+    color: #fff;
+}
+#list{
+    color: #fff;
+}
+.btn{
+    border: none;
+    color: white;
+    padding: none;
+    
+    font-size: 18px;
+
+}
+
+
+
+
+.glyphicon { margin-right:10px; }
+.panel-body { padding:0px; }
+.panel-body table tr td { padding-left: 15px }
+.panel-body .table {margin-bottom: 0px; }
+
+.panel-group .panel+.panel{
+    margin-top: 0px;
+}
+
+.glyphicon glyphicon-chevron-down{
+    padding-left: 70px;
+}
+
+.container-fluid{
+    padding-top: 0px;
+    margin-top: 0px;
+   ;
+}
+.navbar-static-top {
+    padding-bottom: 0px;
+    margin-bottom: 0px; 
+}
+
+.navbar-right{
+    margin-right:0;
+}
+
+.barra{
+  padding-left: 0;
+}
+
+hr{
+    
+    color:#C10303;
+    font-size: 10px;
+}

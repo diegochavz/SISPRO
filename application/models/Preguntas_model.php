@@ -3,15 +3,32 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Preguntas_model extends CI_Model {
 
+public function aprobarPregunta($id_pregunta){
+	$data['estado'] ='aprobado';
+        $this->db->where('id',  $id_pregunta);
+        $this->db->update('pregunta', $data);
+}
+
+public function get_preguntas_programa($programa){//cargar las preguntas que aun no han sido aprobadas por el director de plan de estudios
+	$this->db->select('p.id, u.nombre AS docente, a.nombre AS area');
+	$this->db->from('pregunta p');
+	$this->db->join('docente d', 'd.id_user=p.id_docente_cargo');
+	$this->db->join('usuario u', 'u.id=d.id_user');
+	$this->db->join('area a', 'p.id_area=a.id');
+	$this->db->join('programa_academico pa', 'pa.id=u.id_programa');
+	$this->db->where('pa.nombre', $programa);
+	$this->db->where('p.estado', "espera");
+	$consulta=$this->db->get();
+	if($consulta->num_rows() > 0){
+		return $consulta->result();
+	} return false;
+}
+
 public function getPreguntas($id){ //todos las preguntas creadas por un docente
 	$this->db->select('p.id, p.id_area, a.nombre AS area, p.estado, p.id_enunciado');
 	$this->db->from('pregunta p');
 	$this->db->join('area a', 'a.id=p.id_area');
-		 //$this->db->join('programa_academico p', 'p.id=d.id_programa');
-
 	$this->db->where('p.id_docente_cargo', $id );
-	
-
 	$consulta=$this->db->get();
 	if($consulta->num_rows() > 0){
 		return $consulta->result();

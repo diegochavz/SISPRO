@@ -26,7 +26,7 @@
                    
                     <!--Datatable simulacro-->
                     <?php if($simulacros!=false){?>
-                    <table id="example" class="table table-striped table-bordered nowrap" style="width:100%">
+                    <table id="example" class="table table-striped table-bordered nowrap tabla-simulacro" style="width:100%">
         <thead>
             <tr>
                 <th>Id</th>
@@ -61,23 +61,13 @@
                                         <a href="<?php echo base_url();?>director/Simulacros/editar/<?php echo $simulacro-> id;?>" class="btn btn-warning"><span class="fa fa-pencil"></span></a><!--btn-remove se usara para la peticion ajax-->
 
                                         <!--eliminar categoria-->
-                                        <a href="#" class="btn btn-danger btn-remove"><span class="fa fa-remove"></span></a>
+                                        <a href="<?php echo base_url();?>director/Simulacros/eliminar/<?php echo $simulacro-> id;?>" class="btn btn-danger btn-remove eliminar-simulacro"><span class="fa fa-remove"></span></a>
 
                                     </div> </center>   
                                     </td>
                                         </tr>
                                         <?php endforeach; ?>
                                     </tbody>
-                                    <!--tfoot>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
-                                        </tr>
-                                    </tfoot-->
                                 </table>
             <?php
                    
@@ -130,7 +120,7 @@
                             <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                                 <div class="panel-body">
                                     
-            <form class="form-group" method="post" id="formRegistroS" action="<?php echo base_url();?>director/Simulacros/registrar">
+            <form class="form-group" method="post" id="formRegistroS" action="<?php echo base_url();?>director/Simulacros/editarDatosBase/<?php echo $simulacroid;?>">
 
             <div class="container-fluid">
                 <div class="row">
@@ -144,7 +134,8 @@
                     </div>
                     <div class="col-md-10">
                     <div class="form-group">
-                    <input type="date" class="form-control" id="exampleInputPassword1" value="2018-06-15" name="fecha" required>
+                    <input type="date" class="form-control" id="exampleInputPassword1" 
+                    value="<?php echo $info_simulacro-> fecha;?>" name="fecha" required>
                   </div>
                   </div>
                 </div>
@@ -153,14 +144,14 @@
                     <div class="col-md-4">
                         
                         <div class="form-group">
-                    <input type="time" class="form-control" value="00:00:00" id="exampleInputPassword1" name="horaI" required>
+                    <input type="time" class="form-control" value="<?php echo $info_simulacro-> hora_ini;?>" id="exampleInputPassword1" name="horaI" required>
                   </div>
                     </div>
                     <div class="col-md-2"> <label><b>Hora Final: </b></label></div>
                     <div class="col-md-4">
                         
                         <div class="form-group">
-                    <input type="time" class="form-control" value="01:00:00" id="exampleInputPassword1" name="horaF" required>
+                    <input type="time" class="form-control" value="<?php echo $info_simulacro-> hora_fin;?>" id="exampleInputPassword1" name="horaF" required>
                   </div>
                     </div>
                 </div>
@@ -181,7 +172,6 @@
                                 </h4>
 
                             </div>
-
                             <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
                                 <div class="panel-body">
                                     <?php if($this->session->flashdata("error")):?><!--si hay un mensaje de usuario y contraseña incorr-->
@@ -189,27 +179,21 @@
                     <p><?php echo ($this->session->flashdata("error"));?></p>
                   </div>
                 <?php endif;?>
+                <a href="#">Genarar pdf examen</a>
                             <center><form class="form-inline" action="<?php echo base_url();?>director/Simulacros/registroAreaSimulacro/<?php echo $simulacroid;?>" method="post">
                                     <label>Registrar Area a Evaluar: </label>
                                        <div class="form-group has-feedback">
                   
                   <!--todas las areas-->
                     <select class="form-control" name="areaS">
-                    <?php if(count($areas)!= count($areasNo)){?>
+                    <?php if($areasNo){?>
                         <!--listar las areas que aun no han sido registradas dentro del simulacro-->
                     <?php foreach ($areasNo as $n):?>
-                     <?php $aparece=false;
-                     foreach  ($areas as $area){
-                        if($area==$n){ $aparece=true; break;}
-                     }
-                     if(!$aparece){
-                    ?>
                       <option class="form-control"><?=$n-> nombre;?></option>
                        
                        <?php 
-                        }
                        endforeach;?>
-                                <?php }else{;?>
+                                <?php }else{?>
                       <option class="form-control" selected>has seleccionado todas las areas</option>
                       <?php }?>
                     </select>
@@ -266,16 +250,6 @@
                                         </tr>
                                         <?php endforeach; ?>
                                     </tbody>
-                                    <!--tfoot>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
-                                        </tr>
-                                    </tfoot-->
                                 </table>
                         <?php }else{
                             ?>
@@ -296,11 +270,49 @@
                             </div>
                             <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
                                 <div class="panel-body">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nisl lorem, dictum id pellentesque at, vestibulum ut arcu. Curabitur erat libero, egestas eu tincidunt ac, rutrum ac justo. Vivamus condimentum laoreet lectus, blandit posuere tortor aliquam vitae. Curabitur molestie eros.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nisl lorem, dictum id pellentesque at, vestibulum ut arcu. Curabitur erat libero, egestas eu tincidunt ac, rutrum ac justo. Vivamus condimentum laoreet lectus, blandit posuere tortor aliquam vitae. Curabitur molestie eros. </p>
+                                    <p>Registrar estudiante al simulacro</p>
+                                      <form id="est-s" action="#" method="post">
+                            <p class="login-box-msg">Ingrese codigo del estudiante</p>
+                                <input type="text" class="form-control" style="border-radius: 3px;" placeholder="Ingrese codigo" name="codigo" required>
+                            <button type="submit" class="btn btn-danger btn-block btn-flat" style="border-radius: 3px;">Registrar estudiante</button>
+                        </form>
+                                  <?php
+                                    if(!$estudiantes){ echo "No hay estudiantes registrados en el simulacro";
+                                }else{
+                                  ?>
+                                  <table class="table table-bordered tabla-estudiantes-s">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Codigo</th>
+                <th>Nombre</th>
+                <th>Opciones</th> 
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($estudiantes as $estudiante):?>
+            <tr>
+                   
+                <td><?php echo $estudiante-> id;?></td>
+                <td><?php echo $estudiante-> codigo;?></td>
+                <td><?php echo $estudiante-> nombre;?></td>
+                <td>     
+                                    <center><div class="btn-group">
+                                        <!--visualizar-->
+                                        <button type="button" class="btn btn-info btn-view" data-toggle="modal" data-target="#modal-default" ><span class="fa fa-search"></span></button>
+                                        <!--eliminar-->
+                                        <a href="#" class="btn btn-danger btn-remove"><span class="fa fa-remove"></span></a>
+
+                                    </div> </center>   
+                                    </td>
+                                        </tr>
+                                        <?php endforeach; ?>
+                                <?php
+                                }
+                                ?>
                                 </div>
                             </div>
                         </div>
-                        
                     </div>
                 </div><!--- END COL -->     
             </div><!--- END ROW -->         

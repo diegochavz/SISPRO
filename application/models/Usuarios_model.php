@@ -16,6 +16,37 @@ class Usuarios_model extends CI_Model {
         }
     }
 
+    public function getEstudiantes($programa){
+        $this->db->select('u.nombre, u.id_programa, u.codigo, u.id');
+        $this->db->from('usuario u');
+        $this->db->join('estudiante e','e.id_user=u.id');
+        $this->db->join('programa_academico p','p.id=u.id_programa');
+        $this->db->where("p.nombre", $programa);
+
+        $consulta=$this->db->get();
+        if($consulta->num_rows() > 0){
+            return $consulta->result();
+        }       return false;
+    }
+    public function aprobar_nuevo_docente($id_docente){
+        $data['estado_aprobacion'] ='aprobado';
+        $this->db->where('id_user',  $id_docente);
+        $this->db->update('docente', $data);
+    }
+    public function docentes_en_espera($programa, $valor){
+        $this->db->select('u.nombre, u.id_programa, u.codigo, u.id');
+        $this->db->from('usuario u');
+        $this->db->join('docente d','d.id_user=u.id');
+        $this->db->join('programa_academico p','p.id=u.id_programa');
+        $this->db->where('d.estado_aprobacion', $valor);
+        $this->db->where("p.nombre", $programa);
+
+        $consulta=$this->db->get();
+        if($consulta->num_rows() > 0){
+            return $consulta->result();
+        }       return false;
+    }
+
     public function verificarRol($id){
       $this->db->where("id_user", $id);
       $resultados = $this-> db->get("estudiante");
@@ -32,6 +63,12 @@ class Usuarios_model extends CI_Model {
         }
     }
 }
+
+    public function verificar_docente_aprobado($id){
+        $this->db->where("id_user", $id);
+        $resultados = $this-> db->get("docente");
+        return $resultados-> row() -> estado_aprobacion;
+    }
 
 public function cargarProgramas(){
 
@@ -185,7 +222,7 @@ public function getUsuarioPrograma($id){ //me retorna el programa academico al c
 
     $this->db->select("p.nombre");
     $this->db->from('programa_academico p');
-    $this->db->where("p.id", $id);
+    $this->db->where("p.id", $id_programa);
     $programa = $this-> db->get()->row()->nombre;
 
     return $programa;

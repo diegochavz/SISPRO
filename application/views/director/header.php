@@ -27,6 +27,7 @@
     <!--integrar editor de texto  https://ckeditor.com/ckeditor-4/download/#-->
     <link rel="stylesheet"  href="<?php echo base_url();?>assets/template/dist/css/estilos.css" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Philosopher" rel="stylesheet">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>    
 </head>
 
 <body class="hold-transition skin-blue ">
@@ -61,39 +62,41 @@
 
                        
 
-                    <li><!--class="treeview"-->
-                        <a href="#">
+                    <li>
+                        <a href="<?=base_url();?>director/Areas">
                             <i class="fa fa-sitemap"></i> <span>Areas de Conocimiento</span>
-                            <!--span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span-->
                         </a>
-                        <!--ul class="treeview-menu">
-                            <li><a href="../../index.html"><i class="fa fa-circle-o"></i> Categorias</a></li>
-                            <li><a href="../../index.html"><i class="fa fa-circle-o"></i> Clientes</a></li>
-                            <li><a href="../../index2.html"><i class="fa fa-circle-o"></i> Productos</a></li>
-                        </ul-->
                     </li>
                         <li class="dropdown user user-menu"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user-circle"></i> <span>Usuario</span></a>
 <ul class="dropdown-menu">
                     <li>
-                        <a href="#">
+                        <a href="<?=base_url();?>director/usuarios/Docentes">
                             <i class="fa fa-user-plus"></i> <span>Docentes</span>
                         </a>
                     </li>
 
                     <li>
-                        <a href="#">
+                        <a href="<?=base_url();?>director/usuarios/Estudiantes">
                             <i class="fa fa-mortar-board"></i> <span>Estudiantes</span>
                         </a>
                     </li>
                         </ul>
 </li>
+                      <li class="dropdown user user-menu"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user-circle"></i> <span>Preguntas</span></a>
+<ul class="dropdown-menu">
                     <li>
-                        <a href="#">
-                            <i class="fa fa-question-circle"></i> <span>Preguntas</span>
+                        <a href="<?=base_url();?>director/Preguntas/gestionar">
+                            <i class="fa fa-user-plus"></i> <span>Gestionar Preguntas</span>
                         </a>
                     </li>
+
+                    <li>
+                        <a href="<?=base_url();?>director/Preguntas">
+                            <i class="fa fa-mortar-board"></i> <span>Ver menú preguntas</span>
+                        </a>
+                    </li>
+                        </ul>
+</li>
 
                     <li>
                         <a href="#">
@@ -115,7 +118,7 @@
 
                             <ul class="dropdown-menu">
                                   <li>
-                            <a href="../widgets.html" style="text-align: center;">
+                            <a href="<?php echo base_url();?>director/Perfil" style="text-align: center;">
                             <i class="fa fa-home"></i> <span>Perfil</span>
                         </a>
                         </li>

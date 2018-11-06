@@ -32,8 +32,8 @@ class AutenticarLogin extends CI_Controller { //autenticar
 
 
 			
-		}else{
-			//SESION
+		}else{ //el usuario existe, verifical rol
+
 			$i = $res->id;
 			$rol = $this->Usuarios_model->verificarRol($i);
 			$data =array(
@@ -43,16 +43,20 @@ class AutenticarLogin extends CI_Controller { //autenticar
 				        	'login'=> TRUE
 				        );
 
-			$this->session->set_userdata($data); //enviar datos inic sesion
-
 			if($rol=="estudiante"){
-				//index();
+				$this->session->set_userdata($data); //enviar datos inic sesion
 				redirect(base_url()."estudiante/Perfil"); //redirecciona al controler dashboard estudiante
 			}else if($rol=="docente"){
-				//index();
-				redirect(base_url()."docente/Perfil");
-			}else{
-				//index();
+				$verAprobado = $this->Usuarios_model->verificar_docente_aprobado($res->id);
+				if($verAprobado == "espera"){
+					$this->session->set_flashdata("error", "Debes esperar a la aprobación del director de programa"); 
+					redirect(base_url());
+				}else{
+					$this->session->set_userdata($data); 
+					redirect(base_url()."docente/Perfil");
+				}
+			}else{ //director-admin
+				$this->session->set_userdata($data); //enviar datos inic sesion
 				redirect(base_url()."director/Perfil");
 			}
 
@@ -118,20 +122,9 @@ class AutenticarLogin extends CI_Controller { //autenticar
         	$resultado = $this->Usuarios_model->registrarDocente($data);
         	//redireccionar a la vista doc
 
-        	if($resultado){
-
-        	$user = $this-> Usuarios_model->login($codigo, sha1($password));
-        	$i = $res->id;
-			//$rol = Usuarios_model->verificarRol($i);
-			$data =array(
-				            'id' =>$user->id, 
-				        	'nombre'=>$user->nombre,
-				        	'rol'=> "docente",
-				        	'login'=> TRUE
-				        );
-
-			$this->session->set_userdata($data); //enviar datos inic sesion
-			redirect(base_url()."docente/Perfil"); 
+        	if($resultado){//mostrar mensaje registro de docente
+			$this->session->set_flashdata("error", "Tu registro ha sido exitoso. Debes esperar a que el director de plan de estudios apruebe tu solicitud de registro "); 
+			redirect(base_url()); 
 
         }else{
         	$this->session->set_flashdata("error", "No se pudo registrar el usuario"); 

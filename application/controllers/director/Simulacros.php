@@ -29,6 +29,14 @@ class Simulacros extends CI_Controller {
 
 
 	}
+	public function eliminar(){
+		//primero eliminar-> areas-simulacro, Inscripciones, calificacion-est, simulacro-pregunta, estudiante-pregunta
+		$id_simulacro= $this->uri-> segment(4);//id-> simulacro
+		$this-> Simulacros_model->eliminar($id_simulacro);
+
+		//redirect(base_url()."director/Simulacros");
+		echo "Simulacros";
+	}
 
 	public function registrar(){ 
 		$id=$this->session->userdata("id");
@@ -42,8 +50,21 @@ class Simulacros extends CI_Controller {
 		redirect(base_url()."director/Simulacros");
 	}
 
-	public function editar(){
+	public function editarDatosBase(){
 		$id= $this->uri-> segment(4);
+		$sim['id_director'] =$this->session->userdata("id");
+		$sim['fecha'] =$this->input ->post("fecha");
+		$sim['hora_ini'] =$this->input ->post("horaI");
+		$sim['hora_fin'] =$this->input ->post("horaF");
+
+		$res=$this-> Simulacros_model->editar_datos_base($sim , $id);
+		echo ($sim['fecha']." ".$id);
+		redirect(base_url()."director/Simulacros/editar/".$id);
+	}
+
+	public function editar(){ ///mostrar vista edicion
+		$id= $this->uri-> segment(4);
+		$data['info_simulacro'] = $this-> Simulacros_model->getSimulacro($id);
 		$idUser=$this->session->userdata("id");
 		$data['user']= $this-> Usuarios_model->getDirectorB($idUser);
 		$areas = $this-> Simulacros_model->getAreasSimulacro($id); //listar las areas del simulacro
@@ -58,6 +79,9 @@ class Simulacros extends CI_Controller {
         if($this->uri-> segment(5)=="n"){
         	$this->session->set_flashdata("error", "todas las areas están registradas");
         }
+        //listar estudiantes rgistrados en el simulacro
+        $data['estudiantes']= $this-> Simulacros_model->getEstudiantes($id);
+
 		$this->load->view('director/header');
 		
 		$this->load->view('director/simulacros', $data);

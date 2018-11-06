@@ -8,6 +8,37 @@
     </div>
 </footer>
 
+<script type="text/javascript">
+    //eliminar simulacros ajax
+
+    $(document).ready(function () {
+    var base_url= "<?php echo base_url();?>";
+    $(".eliminar-simulacro").on("click", function(e){
+        e.preventDefault();
+        var ruta = $(this).attr("href");
+        //alert(ruta);
+        $.ajax({
+            url: ruta,
+            type:"POST",
+            success:function(resp){
+               // alert(resp);
+                //http://localhost/ventas_ci/mantenimiento/productos
+                window.location.href = resp;
+              // $(".tabla-simulacro").html(resp);
+            }
+        });
+    });
+    $('.sidebar-menu').tree();
+})
+
+</script>
+
+
+
+
+
+
+
 <!--Modales-->
 
 <!-- Modal -->

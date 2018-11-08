@@ -20,7 +20,6 @@ class Preguntas extends CI_Controller { //autenticar
 		$data['todas_las_areas'] = $this-> Areas_model->getAreas(); //todas las areas
 		$data['preguntas']= $this-> Preguntas_model->getPreguntas($id); //preguntas del docente
 		$data['user']= $this-> Usuarios_model->getDirectorB($id); //datos basicos del user
-		$data['est']= "general";
 		$areas = $this-> Usuarios_model-> getAreasDocente($id);
 
 		if(!$areas){
@@ -32,6 +31,28 @@ class Preguntas extends CI_Controller { //autenticar
 		$this->load->view('director/preguntas', $data);
 		$this->load->view('layouts/footer');
 
+	}
+
+	public function editar(){
+		//cargar vista editar pregunta
+		$id_pregunta= $this->uri-> segment(4);
+//VOY ACAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+	}
+
+	public function verDetalle(){
+		$id_pregunta= $this->uri-> segment(4);
+		//obtener detalle de la pregunta, del enunciado general (si tiene), de las opciones de respuesta, , la respuesta correcta y la justificación
+		$data['info_pregunta'] = $this-> Preguntas_model->getPregunta($id_pregunta); 
+		$data['opciones_respuesta'] = $this-> Preguntas_model->getOpcionesRespuesta($id_pregunta);
+		$data['tipo']= "ver detalle pregunta";
+		if(!is_null($data['info_pregunta']->id_enunciado)){
+			$data['enunciado'] = $this-> Preguntas_model->descripcionEnunciado($data['info_pregunta']->id_enunciado);
+		}else{
+			$data['enunciado'] ="no existe enunciado";
+		}
+		$this->load->view('director/header');
+		$this->load->view('director/preguntas', $data);
+		$this->load->view('layouts/footer');
 	}
 
 	public function aprobar_pregunta(){//aprobar las preguntas realizadas por un docente
@@ -50,7 +71,14 @@ class Preguntas extends CI_Controller { //autenticar
 	}
 
 	public function ver_preguntas_area(){
-		
+		//listar las preguntas por area de conocimiento
+		$this->load->view('director/header');
+		$id_area= $this->uri-> segment(4);
+		$data['tipo'] = "ver preguntas area";
+		$data['nombre_area'] = $this->Areas_model->getNombreArea($id_area);
+		$data['preguntas']= $this-> Preguntas_model->getPreguntasArea($id_area);
+		$this->load->view('director/preguntas', $data);
+		$this->load->view('layouts/footer');
 	}
 
 	public function gestionar(){//cargar vista aprobación de preguntas

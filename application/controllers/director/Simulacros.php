@@ -33,9 +33,6 @@ class Simulacros extends CI_Controller {
 		//primero eliminar-> areas-simulacro, Inscripciones, calificacion-est, simulacro-pregunta, estudiante-pregunta
 		$id_simulacro= $this->uri-> segment(4);//id-> simulacro
 		$this-> Simulacros_model->eliminar($id_simulacro);
-
-		//redirect(base_url()."director/Simulacros");
-		echo "Simulacros";
 	}
 
 	public function registrar(){ 

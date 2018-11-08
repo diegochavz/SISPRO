@@ -14,6 +14,8 @@
     $(document).ready(function () {
     var base_url= "<?php echo base_url();?>";
     $(".eliminar-simulacro").on("click", function(e){
+
+        var id = $(this).parents("tr").attr("id");
         e.preventDefault();
         var ruta = $(this).attr("href");
         //alert(ruta);
@@ -21,10 +23,7 @@
             url: ruta,
             type:"POST",
             success:function(resp){
-               // alert(resp);
-                //http://localhost/ventas_ci/mantenimiento/productos
-                window.location.href = resp;
-              // $(".tabla-simulacro").html(resp);
+               $("#"+id).remove();
             }
         });
     });

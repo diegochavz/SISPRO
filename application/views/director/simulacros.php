@@ -40,7 +40,7 @@
         </thead>
         <tbody>
             <?php foreach ($simulacros as $simulacro):?>
-            <tr>
+            <tr id="<?php echo $simulacro -> id;?>">
                 
                    
                 <td><?php echo $simulacro-> id;?></td>

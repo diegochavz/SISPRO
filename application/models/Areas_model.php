@@ -3,6 +3,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Areas_model extends CI_Model {
 
+
+public function getNombreArea($id_area){
+    $this->db->select('*');
+    $this->db->from('area');
+    $this->db->where("id", $id_area);
+    return $this-> db->get()->row()->nombre;
+
+}
+
 public function getAreas(){ //todas las areas existentes
     $this->db->select('*');
     $this->db->from('area');

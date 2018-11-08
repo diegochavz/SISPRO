@@ -32,6 +32,8 @@
             <tr>
                 <th>Id</th>
                 <th>Nombre</th>
+                <th>N° de preguntas</th>
+                <th>N° de docentes asignados</th>
             </tr>
         </thead>
         <tbody>

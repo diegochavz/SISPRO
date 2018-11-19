@@ -123,7 +123,7 @@ class AutenticarLogin extends CI_Controller { //autenticar
         	//redireccionar a la vista doc
 
         	if($resultado){//mostrar mensaje registro de docente
-			$this->session->set_flashdata("error", "Tu registro ha sido exitoso. Debes esperar a que el director de plan de estudios apruebe tu solicitud de registro "); 
+			$this->session->set_flashdata("error", "Registro exitoso. esperar la aprobación del director de Programa"); 
 			redirect(base_url()); 
 
         }else{

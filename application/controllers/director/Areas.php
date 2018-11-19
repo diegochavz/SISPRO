@@ -24,6 +24,24 @@ class Areas extends CI_Controller { //autenticar
 
 	}
 
+	public function registrarArea(){ //el area ya existe, el docente va a asociarse a un area
+		$id=$this->session->userdata("id");
+		$area = $this->input ->post("areaR");
+
+		$this->Areas_model->registrarAreaDoc($area, $id);
+		redirect(base_url()."director/Areas/misAreas");
+	}
+
+	public function misAreas(){
+		$this->load->view('director/header');
+		$id=$this->session->userdata("id");
+		$data['tipo'] = "misAreas";
+		$data['areas']= $this-> Areas_model->getAreas(); //listar todas las areas existentes del user
+		$data['areas_doc'] = $this-> Usuarios_model-> getAreasDocente($id);
+		$this->load->view('director/areas_conocimiento', $data);
+		$this->load->view('layouts/footer');
+	}
+
 	public function registrar(){
 		$area['nombre'] = $this->input ->post("nombreA");
 		$validar_repeticion = $this-> Areas_model->getArea($area['nombre']);

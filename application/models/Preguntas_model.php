@@ -78,6 +78,11 @@ public function getOpcionesRespuesta($id_pregunta){
     public function crearEnunciado($data)
     {
         $this->db->insert("enunciado", $data);
+        $this->db->select('*');
+        $this->db->from('enunciado');
+        $consulta = $this->db->get()->result();
+
+        return $consulta[count($consulta) - 1]->id; //retornar id ultimo enunciado
     }
 
     public function crearPregunta($info)

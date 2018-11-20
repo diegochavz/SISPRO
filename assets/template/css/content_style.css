@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic');
+#page_content{
+    border-radius: 5px;
+    margin: 8% auto;
+    background-color: #F1F1F1;
+    width: 80%;
+    height: 1000px;
+}
+
+#indice_pag{
+    margin: 0px auto;
+    width: 78%;
+    margin-bottom:20px;
+    font-family: 'Nanum Gothic', sans-serif;
+    color: #979797;
+    font-size: 20px;
+    padding-top: 20px;
+}
+
+#cotenido_pag{
+    margin: 0 auto;
+    width: 78%;
+    height: 30px;
+}
+
+footer{
+    background: black;
+    padding: 8px;
+}
+
+
+
+

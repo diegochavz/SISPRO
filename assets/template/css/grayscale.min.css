@@ -1,0 +1,261 @@
+@import url('https://fonts.googleapis.com/css?family=Shadows+Into+Light');
+
+#mainNav{
+     min-height:56px;
+     background-color:#fff
+}
+
+#mainNav .navbar-toggler{
+    font-size:80%;
+    padding:.75rem;
+    color:green;
+    border:1px solid #blue
+}
+
+#mainNav .navbar-toggler:focus{
+    outline:0
+}
+#mainNav .navbar-brand{
+    
+    color:#505050;
+    font-weight:700;
+    padding:.9rem 0
+}
+
+#mainNav .navbar-nav .nav-item:hover{
+    color:fade(white,80%);
+    outline:0;
+    background-color:transparent
+}
+
+#mainNav .navbar-nav .nav-item:active,#mainNav .navbar-nav .nav-item:focus{
+    
+    outline:0;
+    background-color:transparent
+}
+
+@media (min-width:992px){
+    
+    #mainNav{
+        padding-top:0;padding-bottom:0;border-bottom:none;background-color:transparent;-webkit-transition:background-color .3s ease-in-out;transition:background-color .3s ease-in-out}#mainNav .navbar-brand{padding:.5rem 0;color:rgba(255,255,255,.5)}#mainNav .nav-link{-webkit-transition:none;transition:none;padding:2rem 1.5rem;color:rgba(255,255,255,.5)}#mainNav .nav-link:hover{color:rgba(255,255,255,.75)}#mainNav .nav-link:active{color:#fff}#mainNav.navbar-shrink{background-color:#fff}#mainNav.navbar-shrink .navbar-brand{color:#161616}
+
+#mainNav.navbar-shrink .nav-link{
+    color:#505050;
+    padding:1.5rem 1.5rem 1.25rem;
+    border-bottom:.25rem solid transparent}
+        
+#mainNav.navbar-shrink .nav-link:hover{
+    color:#EA3D4F;
+}
+
+#mainNav.navbar-shrink .nav-link:active{
+    color:#EA3D4F
+}
+
+#mainNav.navbar-shrink .nav-link.active{
+    color:#EA3D4F;
+    outline:0;
+    border-bottom:.25rem solid #EA3D4F}
+}
+/**************************************/
+.masthead{
+    position:relative;
+    width:100%;
+    height:auto;
+    min-height:35rem;
+    padding:15rem 0;
+    background-image: url(../img/bg-masthead.jpg);
+    background-position:center;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+    background-size:cover
+
+}
+
+.masthead #mast{
+    background: white;
+    height: 300px;
+    border-bottom: 4px solid #EA3D4F;
+}
+
+.masthead #mast_cont{
+    display:flex;
+	margin-top: 40px;
+    
+}
+
+.masthead #mast_img img{
+    width: 250px;
+    margin-top: 40px; 
+   margin-right: 40px;
+    margin-left: 40px;
+    
+}
+
+.masthead #mast_form{
+    color: #505050;
+    width: 350px;
+    padding-left: 50px;
+    border-left: 2px solid #EA3D4F;
+    margin-right: 50px;
+}
+
+.masthead #mast_form label{
+margin-bottom: -10px;
+}
+.masthead #mast_form button{
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    background-color: #EA3D4F;
+    float: right;
+    margin-bottom: 15px;
+}
+
+
+
+@media (min-width:768px){
+    .masthead h1{
+        font-size:4rem;
+        line-height:4rem}}@media (min-width:992px){.masthead{height:100vh;padding:0}.masthead h1{font-size:6.5rem;line-height:6.5rem;letter-spacing:.8rem}.masthead h2{max-width:30rem;font-size:1.25rem}}.btn{-webkit-box-shadow:0 .1875rem .1875rem 0 rgba(0,0,0,.1)!important;box-shadow:0 .1875rem .1875rem 0 rgba(0,0,0,.1)!important;padding:1.25rem 2rem;font-family:'Varela Round';font-size:80%;text-transform:uppercase;letter-spacing:.15rem;border:0}.btn-primary{background-color:#64a19d}.btn-primary:hover{background-color:#4f837f}.btn-primary:focus{background-color:#4f837f;color:#fff}.btn-primary:active{background-color:#467370!important}
+
+/********************************************************/
+.info-section{
+    padding:5rem 0 5rem;
+    background: #F4F1F1;
+}
+
+.info-section .card{
+    border:0;
+    border-bottom:.25rem solid #EA3D4F;
+    box-shadow: 0 0 15px #ddd;
+    
+}
+
+.info-section .card h4{
+    font-size:.8rem;
+    font-family:'Varela Round';
+    text-transform:uppercase;
+    letter-spacing:.15rem
+}
+
+.info-section .card hr{
+    border-color:#EA3D4F;
+    border-width:.25rem;
+    width:3rem
+}
+
+.info-section .social{
+    margin-top:5rem
+}
+
+.info-section .social a{
+    text-align:center;
+    height:3rem;
+    width:3rem;
+    background:rgba(255,255,255,.1);
+    border-radius:100%;
+    line-height:3rem;
+    color:rgba(255,255,255,.3)
+}
+
+.info-section .social a:hover{
+    color:rgba(255,255,255,.5)
+}
+
+.info-section .social a:active{
+    color:#fff
+}
+
+/************************************************************/
+
+
+.projects-section{
+    padding:10rem 0
+}
+
+.projects-section .featured-text{
+    padding:2rem
+}
+
+@media (min-width:992px){.projects-section .featured-text{padding:0 0 0 2rem;border-left:.5rem solid #64a19d}}.projects-section .project-text{padding:3rem;font-size:90%}@media (min-width:992px){.projects-section .project-text{padding:5rem}.projects-section .project-text hr{border-color:#64a19d;border-width:.25rem;width:30%}}
+/*************************************************/
+.signup-section{
+    position:relative;
+    width:100%;
+    padding:3rem 0;
+    background-image: url(../img/bg-singup.jpg);
+    background-position:center;
+    background-repeat:no-repeat;
+    background-attachment:scroll;
+    background-size:cover
+}
+
+
+
+.signup-section #reg{
+    margin: 0 auto;
+    background: white;
+    width: 80%;
+    height: auto;
+    padding-bottom: 70px;
+    border-bottom: 4px solid #EA3D4F;
+}
+
+.signup-section #reg h1{
+    text-align: center;
+    color: #B40486;
+    font-family: 'Shadows Into Light', cursive;
+    padding-right:40px;
+    padding-left: 40px;
+    padding-top: 40px;
+}
+
+.signup-section #reg p{
+    text-align: center;
+    color: #505050;
+    font:
+}
+
+
+.signup-section #reg_form{
+    margin: 0 auto;
+    color: #505050;
+    width: 80%;
+    padding-top: 10px;
+}
+
+.signup-section #reg_form label{
+    margin-bottom: -10px;
+    font-size: 15px;
+}
+
+.signup-section #reg_form select{
+    width: 153%;
+}
+.signup-section #reg_form input{
+    height: 35px; 
+}
+
+
+
+.signup-section #reg_form button{
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    background-color: #EA3D4F;
+    
+    float: right;
+}
+
+/***************************************************/
+
+
+body{font-family:Nunito;letter-spacing:.0625em}a{color:#64a19d}a:focus,a:hover{text-decoration:none;color:#3c6360}.bg-black{background-color:#161616!important}.bg-primary{background-color:#64a19d!important}.text-primary{color:#64a19d!important}
+
+footer{
+     padding:1rem 0;
+     background-image: linear-gradient(to right, rgba(205, 43, 57), rgba(137, 77, 154));
+}

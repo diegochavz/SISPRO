@@ -1,6 +1,9 @@
 <div id="page_content">
       <div class="container-fluid">
+        <?php if ($tipo == "general") {
+    ?>
           <div id="indice_pag">
+
             <p>Gestionar > <a href="<?=base_url();?>director/Preguntas">Preguntas</a></p>
             </div>
          <div id="cotenido_pag">
@@ -16,7 +19,7 @@
             <div id="cuadro_dos">
                  <form>
                     <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Registrar</button>
-                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal2">Ver Preguntas</button>
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal2">Aprobar Preguntas</button>
                  </form>
             </div>
             </div>
@@ -33,8 +36,9 @@
       <div class="container">
         <?php
 $num_filas = ceil(count($todas_las_areas) / 3);
-$cont      = 0;
-for ($i = 0; $i < $num_filas; $i++) {?>
+    $cont      = 0;
+    for ($i = 0; $i < $num_filas; $i++) {
+        ?>
 
            <div class="row">
             <?php for ($i = 0; $i < 3 || $cont < count($todas_las_areas); $i++, $cont++) {?>
@@ -49,7 +53,7 @@ for ($i = 0; $i < $num_filas; $i++) {?>
           </div>
 
           <?php }
-    ;?>
+        ;?>
 </div>
 
         <?php }?>
@@ -57,6 +61,163 @@ for ($i = 0; $i < $num_filas; $i++) {?>
     </section>
          <!--fin contenido areas-->
 </div>
+<?php } else if ($tipo == "ver preguntas area") {?>
+
+    <div id="indice_pag">
+            <p>Gestionar > <a href="<?=base_url();?>director/Preguntas">Preguntas</a> > <a href="<?php echo base_url(); ?>director/Preguntas/ver_preguntas_area/<?=$id_a?>"><?=$nombre_area?></a></p>
+            </div>
+         <div id="cotenido_pag">
+            <?php if ($preguntas) {?>
+    <div class="table_">
+               <table class="table table-hover">
+  <thead>
+    <tr id="tit_table">
+      <th scope="col">Id</th>
+      <th scope="col">Estado</th>
+      <th scope="col">Visibilidad</th>
+      <th scope="col">Opciones</th>
+    </tr>
+  </thead>
+  <tbody>
+
+     <?php foreach ($preguntas as $pregunta): ?>
+        <tr>
+        <th scope="row"><?php echo $pregunta->id; ?></th>
+        <td><?php echo $pregunta->estado; ?></td>
+        <td><?php echo $pregunta->visibilidad; ?></td>
+        <td><center><a href="<?php echo base_url(); ?>director/Preguntas/verDetalle/<?=$pregunta->id?>"><button type="button" class="btn btn-danger btn-sm">Ver detalle</button></a></center></td>
+        </tr>
+    <?php endforeach;?>
+
+  </tbody>
+</table>
+</div>
+</div>
+<?php } else {?>
+            <div id="indice_pag">
+            <center><p>No tienes Preguntas registradas</p></center>
+            </div>
+    <?php }?>
+</div>
+<?php } else if ($tipo == "ver detalle pregunta") {
+    ?>
+
+    <div id="indice_pag">
+            <p>Gestionar > <a href="<?=base_url();?>director/Preguntas">Preguntas</a> > <a href="<?php echo base_url(); ?>director/Preguntas/ver_preguntas_area/<?=$area_p->id?>"><?=$area_p->nombre?></a></p>
+            </div>
+         <div id="cotenido_pag">
+            <center><h3>Informacion acerca de la pregunta <?=$info_pregunta->id?></h3></center>
+<?php
+if ($enunciado != "no existe enunciado") {
+        ?>
+<p><?=$enunciado;?></p>
+<?php
+}
+    ?>
+<p><?=$info_pregunta->descripcion?></p>
+<?php
+$i = 97;
+    foreach ($opciones_respuesta as $o) {
+        ?>
+        <p><?=chr($i++) . ". " . $o->descripcion;?></p>
+        <?php
+
+    }?>
+    <center><h3>Informacion de las opcion(es) de respuesta</h3></center> <br>
+    <?php
+if ($info_pregunta->tipo == "sm") {
+        ?>
+        <div class="table_">
+               <table class="table table-hover">
+  <thead>
+    <tr id="tit_table">
+      <th scope="col"><center>Opción</center></th>
+      <th scope="col"><center>Respuesta</center></th>
+      <th scope="col"><center>Justificación</center></th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php $i = 97;?>
+     <?php foreach ($opciones_respuesta as $o): ?>
+        <tr>
+        <th scope="row"><center><?php echo chr($i++); ?></center></th>
+        <td><center><?php if ($o->correcta == "si") {
+            echo "Correcta";
+        } else {
+            echo "Incorrecta";
+        }?></center></td>
+        <td><center><?php echo $o->justificacion; ?></center></td>
+        </tr>
+    <?php endforeach;?>
+  </tbody>
+</table>
+</div>
+<?php
+} else {
+        //verdadero-falso, pregunta-abierta
+        foreach ($opciones_respuesta as $o) {
+            if ($o->correcta == "si") {
+                ?>
+        <p>Respuesta correcta: <?=$o->descripcion;?></p>
+        <p>Justificacion: <?=$o->justificacion;?></p>
+        <?php
+break;
+            }
+        }
+    }
+    ?>
+        </div>
+
+<?php } else if ($tipo == "ver preguntas docente") {?>
+
+            <div id="indice_pag">
+            <p>Gestionar > <a href="<?=base_url();?>director/Preguntas">Preguntas</a></p>
+            </div>
+                 <div id="indice_pag">
+                 <center><p>Preguntas del Director de Programa</a></p></center>
+                 </div>
+         <div id="cotenido_pag">
+            <?php if ($preguntas) {?>
+    <div class="table_">
+               <table class="table table-hover">
+  <thead>
+    <tr id="tit_table">
+      <th scope="col"><center>Id</center></th>
+      <th scope="col"><center>Area</center></th>
+      <th scope="col"><center>Estado</center></th>
+      <th scope="col"><center>Visibilidad</center></th>
+      <th scope="col"><center>Opciones</center></th>
+    </tr>
+  </thead>
+  <tbody>
+
+     <?php foreach ($preguntas as $pregunta): ?>
+        <tr>
+        <th scope="row"><center><?php echo $pregunta->id; ?></center></th>
+        <td><center><?php echo $pregunta->area; ?></center></td>
+        <td><center><?php echo $pregunta->estado; ?></center></td>
+        <td><center><?php echo $pregunta->visibilidad; ?></center></td>
+        <td>
+            <center>
+                <a href="<?php echo base_url(); ?>director/Preguntas/verDetalle/<?=$pregunta->id?>"><button type="button" class="btn btn-danger btn-sm">Ver detalle</button></a>
+                <a href="<?php echo base_url(); ?>director/Preguntas/editar/<?=$pregunta->id?>"><button type="button" class="btn btn-danger btn-sm">Editar</button></a></a>
+                <a href="<?php echo base_url(); ?>director/Preguntas/eliminar/<?=$pregunta->id?>"><button type="button" class="btn btn-danger btn-sm">Eliminar</button></a>
+            </center>
+        </tr>
+    <?php endforeach;?>
+
+  </tbody>
+</table>
+</div>
+</div>
+<?php } else {?>
+            <div id="indice_pag">
+            <center><p>No tienes Preguntas registradas</p></center>
+            </div>
+    <?php }?>
+</div>
+
+<?php }?>
 </div>
       </div>
 
@@ -131,71 +292,116 @@ for ($i = 0; $i < $num_filas; $i++) {?>
         <div class="modal-header">
 
         <div id="reg_sim_titu_modal">
-                <h3>Registrar pregunta</h3>
-
+                <h3>Registrar preguntas</h3>
         </div>
       </div>
-
-
        <div class="modal-body">
        <div id="reg_sim_content">
 
-                <form>
-
-
-
+    <form class="form-group" method="post" id="formCrearPregunta" action="<?php echo base_url(); ?>director/Preguntas/anadir?>">
 <!--------------------EDITOR DE TEXTO------------------------------->
 
-
     <div class="panel_edit_text">
-        <form  action="prueba.php" method="post" id="frm-test">
-            <div class="form-group col-md-8">
-                    <label for="inputState">Selecciona una materia</label>
-                    <select id="inputState" class="form-control">
-                        <option selected>Calculo diferencial</option>
-                        <option>...</option>
+        <div id="frm-test">
+            <div class="form-group col-md-12">
+                    <center><label for="inputState">Selecciona un Area:</label></center>
+                    <select id="inputState" class="form-control" name="area">
+                        <?php foreach ($Areas as $area): ?>
+                        <option value="<?=$area->id;?>"><?=$area->nombre?></option>
+                        <?php endforeach?>
                     </select>
             </div>
 
-            <hr class="my-4">
-
-            <div  class="form-group">
-                <textarea id="txt-content" name="txt-content"></textarea>
+            <center><label for="inputState">Ingresar Enunciado</label></center>
+            <div  class="form-group" id="inputState">
+                <center><textarea id="js-textarea" rows="5" cols="10" name="enunciado">Esto es Opcional</textarea></center>
             </div>
-
-            <hr class="my-4">
-
-            <div  class="form-group">
-    <label for="inputState">Respuesta unica: &nbsp; &nbsp; &nbsp; </label>
-
-            <div class="form-check form-check-inline">
-  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-  <label class="form-check-label" for="inlineCheckbox1">Si</label>
-</div>
-<div class="form-check form-check-inline">
-  <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-  <label class="form-check-label" for="inlineCheckbox2">No</label>
-</div>
-
+            <div class="row">
+                <div class="col-md-6">
+                    <center><label for="inputState">Tipo de Pregunta</label></center><br>
+                    <select id="tipo_pregunta" onchange="contenido_preguntas()" class="form-control" name="tipo">
+                       <option value="sm">Seleccion Múltiple</option>
+                       <option value="vf">Verdadero y Falso</option>
+                       <option value="pa">Pregunta abierta</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <center><label for="inputState">Visibilidad</label></center><br>
+                    <select id="inputState" class="form-control tipo_pregunta" name="visibilidad">
+                       <option value="publico">Publico</option>
+                       <option value="privada">Privada</option>
+                    </select>
+                </div>
             </div>
-
-            <hr class="my-4">
+            <br>
+            <center><label for="inputState">Menú de Preguntas</label></center><hr>
+            <div  class="form-group">
+                <center><textarea name="descripcionPregunta" id="inputState" rows="3" cols="75" placeholder="Ingresar la Pregunta"></textarea></center>
+            </div>
              <div  class="form-group">
-                <label for="inputState">Ingresa las respuestas</label>
-                     <div id="group_ques">
-                          <input class="form-check-input" type="radio" name="radio_1" value="opt_circle_1">
-                         <input class="op_preg"  type="text" name="opt_text_1">
-                         <input type="button" id="add_kid()" onclick="agregar_pregunta()" value=" + " />
-                     </div>
+                <center><label for="inputState">Ingresa las respuestas</label></center><br>
+                     
+                     <div id="seleccionMultiple" style="display: block;">
+                        <div id="contenido_opcion1">
+                    <div id="opciones">
+
+              <input type="radio" name="correcta" value="1"
+              style="margin-right:15px;">
+              <input type="text" size="42" name="opcion[]" placeholder="Ingrese opcion">
+              <input type="text" size="30" name="justificacion[]" placeholder="Ingrese justificación(opcional)">
+              </div>
+              <a href="#" id="mas">Mas opciones</a> / 
+              <a href="#" id="menos">Menos Opciones</a>
+
+              <script type="text/javascript">
+                var opcion = 1;
+                  $(document).ready( function() {
+            $('#mas').click( function(e) {
+                opcion++;
+                document.getElementById("opciones").innerHTML+='<div id="group_ques'+opcion+'"><input type="radio"  name="correcta" value="'+opcion+'" style="margin-right:15px;"> <input type="text" size="42" name="opcion[]" placeholder="Ingrese opcion"> <input type="text" size="30" name="justificacion[]" placeholder="Ingrese justificación(opcional)"></div>';
+            });
+
+             $('#menos').click( function(e) {
+                $('#group_ques'+opcion).remove();
+                opcion--;
+            });
+        });
+              </script>
+
+
+    </div>
+    <hr>
+</div>
+<div id="verdaderoFalso" style="display: none;">
+<div id="contenido_opcion2">
+
+             <input type="radio" name="correcta2" value="1"
+              style="margin-right:15px;">
+              ARREGLAR ERROR REGISTRO VF
+              <input type="text" size="42" name="opcion2[]" value="verdadero" disabled>
+              <input type="text" size="30" name="justificacion2[]" placeholder="Ingrese justificación(opcional)">
+
+         <input type="radio" name="correcta2" value="2"
+              style="margin-right:15px;">
+              <input type="text" size="42" name="opcion2[]" value="Falso" disabled>
+              <input type="text" size="30" name="justificacion2[]" placeholder="Ingrese justificación(opcional)">
+
+    </div>
+</div>
+<div id="preguntaAbierta" style="display: none;">
+<div id="contenido_opcion3">
+        <div  class="form-group">
+
+                <center><textarea name="opciona" id="inputState" rows="3" cols="75" placeholder="Ingresar la Respuesta"></textarea></center>
+            </div>
+        <input type="text" size="50" style= "display : none; " name="justificaciona" placeholder="Ingrese justificación(opcional)">
+    </div>
+    </div>
 
                 </div>
-
-             <input type="submit" class="btn btn_reg_pre" id="btn-enviar" value="Registrar">
-                </form>
+             <input type="submit" class="btn btn_reg_pre" value="Registrar">
+                </div>
             </div>
-
-
-
 
    <!-------------------- FIN EDITOR DE TEXTO------------------------------->
 
@@ -223,22 +429,34 @@ for ($i = 0; $i < $num_filas; $i++) {?>
 
     <!-------------------SCRIPT CORRESPONDIENTE AL PANEL DE TEXTO--------------------------------->
   <script type="text/javascript">
-        $(document).ready(function(){
-            $('#txt-content').Editor();
-
-            $('#txt-content').Editor('setText', ['<p style="color:#6E6E6E;">Ingrese aquí el enunciado de su pregunta</p>']);
-
-            $('#btn-enviar').click(function(e){
-                e.preventDefault();
-                $('#txt-content').text($('#txt-content').Editor('getText'));
-                $('#frm-test').submit();
-            });
-        });
+    var editor = CKEDITOR.replace( 'js-textarea' );
+    CKEDITOR.config.width="95%";
+    CKEDITOR.config.height="150px";
 </script>
 
    <!---------------------RESPUESTAS DINAMICAS--------------------------->
 
    <script type="text/javascript">
+
+    //llamar funcion cuando cambia tipo de pregunta en el select
+function contenido_preguntas(){
+    //alert("hombre");
+    var tipo_pregunta = (document.getElementById('tipo_pregunta')).value;
+    if(tipo_pregunta == "sm"){
+         document.getElementById('seleccionMultiple').style.display = "block";
+         document.getElementById('verdaderoFalso').style.display = "none";
+         document.getElementById('preguntaAbierta').style.display = "none";
+    }else if(tipo_pregunta == "vf"){
+         document.getElementById('seleccionMultiple').style.display = "none";
+         document.getElementById('verdaderoFalso').style.display = "block";
+         document.getElementById('preguntaAbierta').style.display = "none";
+    }else{ //pa
+         document.getElementById('seleccionMultiple').style.display = "none";
+         document.getElementById('verdaderoFalso').style.display = "none";
+         document.getElementById('preguntaAbierta').style.display = "block";
+    }
+}
+
     var i=1;
           function agregar_pregunta(){
 

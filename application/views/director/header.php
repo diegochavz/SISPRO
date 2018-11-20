@@ -21,9 +21,10 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
    <!-------editor de texto------->
    <script type="text/javascript" src="<?php echo base_url(); ?>assets/template/js/jquery-1.12.0.js"></script>
-   <script type="text/javascript" src="<?php echo base_url(); ?>assets/template/js/editor.js"></script> 
+   <script src="//cdn.ckeditor.com/4.11.1/standard/ckeditor.js"></script>
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/template/css/editor.css">
+    <link href="https://ww2.ufps.edu.co/assets/img/ico/favicon.ico" rel="Shortcut icon">
   </head>
 
   <body>

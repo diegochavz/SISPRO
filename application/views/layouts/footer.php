@@ -10,23 +10,6 @@
 
 <script type="text/javascript">
     
-//llamar funcion cuando cambia tipo de pregunta en el select
-function contenido_preguntas(){
-    var tipo_pregunta = (document.getElementById('tipo_pregunta')).value;
-    if(tipo_pregunta == "sm"){
-         document.getElementById('seleccionMultiple').style.display = "block";
-         document.getElementById('verdaderoFalso').style.display = "none";
-         document.getElementById('preguntaAbierta').style.display = "none";
-    }else if(tipo_pregunta == "vf"){
-         document.getElementById('seleccionMultiple').style.display = "none";
-         document.getElementById('verdaderoFalso').style.display = "block";
-         document.getElementById('preguntaAbierta').style.display = "none";
-    }else{ //pa
-         document.getElementById('seleccionMultiple').style.display = "none";
-         document.getElementById('verdaderoFalso').style.display = "none";
-         document.getElementById('preguntaAbierta').style.display = "block";
-    }
-}
 
     //eliminar simulacros ajax
 

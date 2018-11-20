@@ -15,7 +15,7 @@ class Preguntas extends CI_Controller { //autenticar
 	{
 		$this->load->view('director/header');
 		$id=$this->session->userdata("id");
-
+		$data['tipo']= "general";
 		//Modal aprobar preguntas
 		$programa =  $this-> Usuarios_model->getUsuarioPrograma($id);
 		//cargar preguntas de los profesores de ingenieria de sistemas que aun no han sido aprobadas
@@ -33,10 +33,17 @@ class Preguntas extends CI_Controller { //autenticar
 		}else{
 			$data['crear']= true;
 		}
+
+		//cargar vista crear pregunta
+		$data['Areas'] = $this-> Usuarios_model ->getAreasDocente($id);
+
 		$this->load->view('director/preguntas', $data);
-		$this->load->view('layouts/footer');
+	}
+
+	public function eliminar(){
 
 	}
+
 	public function anadir(){ 
 
 		$enunciado['contenido'] = $this->input ->post("enunciado");
@@ -53,13 +60,33 @@ class Preguntas extends CI_Controller { //autenticar
 
 		$id_p = $this-> Preguntas_model-> crearPregunta($pregunta);
 		//insertar opciones
-	if($pregunta['tipo']!="pa"){
+	if($pregunta['tipo']=="sm"){
 		$opciones = $this->input ->post("opcion");
 		$justificaciones = $this->input ->post("justificacion");
 		$opcion_correcta = $this->input ->post("correcta");
 		$contador = 0;
 
 		foreach ($opciones as $opcion) {
+			if($opcion!=""){
+				if($contador+1 == $opcion_correcta) $opcio['correcta']= "si";
+				else   $opcio['correcta']= "no";
+
+				$opcio['id_pregunta'] = $id_p;
+				$opcio['descripcion'] = $opcion;
+				$opcio['justificacion'] = $justificaciones[$contador];
+
+				$this-> Preguntas_model-> registrarOpcion($opcio);
+			}
+			$contador++;
+		}
+	}else if($pregunta['tipo']=="vf"){
+
+		$opcione = $this->input ->post("opcion2");
+		$justificaciones = $this->input ->post("justificacion2");
+		$opcion_correcta = $this->input ->post("correcta2");
+		$contador = 0;
+echo (count($opcione));
+		foreach ($opcione as $opcion) {
 			if($opcion!=""){
 				if($contador+1 == $opcion_correcta) $opcio['correcta']= "si";
 				else   $opcio['correcta']= "no";
@@ -81,21 +108,10 @@ class Preguntas extends CI_Controller { //autenticar
 	}
 
 	}
-	public function crear(){
-		$id = $this->session->userdata("id");
-		//cargar vista crear pregunta
-		$this->load->view('director/header');
-		$data['tipo'] = "crear pregunta";
-		$data['Areas'] = $this-> Usuarios_model ->getAreasDocente($id);
-
-		$this->load->view('director/preguntas', $data);
-		$this->load->view('layouts/footer');
-	}
 
 	public function editar(){
 		//cargar vista editar pregunta
 		$id_pregunta= $this->uri-> segment(4);
-//VOY ACAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 	}
 
 	public function verDetalle(){
@@ -103,6 +119,7 @@ class Preguntas extends CI_Controller { //autenticar
 		//obtener detalle de la pregunta, del enunciado general (si tiene), de las opciones de respuesta, , la respuesta correcta y la justificación
 		$data['info_pregunta'] = $this-> Preguntas_model->getPregunta($id_pregunta); 
 		$data['opciones_respuesta'] = $this-> Preguntas_model->getOpcionesRespuesta($id_pregunta);
+		$data['area_p'] = $this-> Preguntas_model->getAreaP($id_pregunta);
 		$data['tipo']= "ver detalle pregunta";
 		if(!is_null($data['info_pregunta']->id_enunciado)){
 			$data['enunciado'] = $this-> Preguntas_model->descripcionEnunciado($data['info_pregunta']->id_enunciado);
@@ -133,6 +150,7 @@ class Preguntas extends CI_Controller { //autenticar
 		//listar las preguntas por area de conocimiento
 		$this->load->view('director/header');
 		$id_area= $this->uri-> segment(4);
+		$data['id_a'] = $id_area;
 		$data['tipo'] = "ver preguntas area";
 		$data['nombre_area'] = $this->Areas_model->getNombreArea($id_area);
 		$data['preguntas']= $this-> Preguntas_model->getPreguntasArea($id_area);

@@ -1,0 +1,89 @@
+/**Establece el color del head en movil**/
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+#mainNav{
+    width: 100%;
+     min-height:56px;
+     background-color:white;
+     font-family: 'Raleway', sans-serif;
+    font-size: 14px;
+}
+/**Cuando esta contreaido el menu**/
+#mainNav .navbar-toggler{
+    font-size:80%;
+    padding:.75rem;
+    color:#505050;
+    border:1px solid #blue;
+}
+
+#mainNav .navbar-toggler:focus{
+    outline:0
+}
+#mainNav .navbar-brand{
+    padding:.9rem 0;
+}
+
+#mainNav .navbar-brand img{
+    width: 16%;
+}
+
+#mainNav .navbar-nav .nav-item:hover{
+    color:fade(blue,80%);
+    outline:0;
+}
+
+#mainNav .navbar-nav .nav-item:active,#mainNav .navbar-nav .nav-item:focus{
+    
+    outline:0;
+
+}
+
+@media (min-width:992px){
+    
+    #mainNav{
+        padding-top:0;
+        padding-bottom:0;
+        border-bottom:none;
+        background-color:transparent;
+        -webkit-transition:background-color .3s ease-in-out;
+        transition:background-color .3s ease-in-out;
+    }
+    
+    #mainNav .navbar-brand{
+        padding:.5rem 0;
+    }
+    
+    #mainNav .nav-link{
+        -webkit-transition:none;
+        transition:none;
+        padding:2rem 1.5rem;
+        color:white;
+    }
+    
+    
+    #mainNav .nav-link:hover{color:rgba(255,255,255,.75)}#mainNav .nav-link:active{color:#fff}#mainNav.navbar-shrink{background-color:#fff}
+    #mainNav.navbar-shrink .navbar-brand{color:#161616}
+
+#mainNav.navbar-shrink .nav-link{
+    color:#505050;
+    padding:1.5rem 1.5rem 1.25rem;
+    border-bottom:.25rem solid transparent}
+        
+#mainNav.navbar-shrink .nav-link:hover{
+    color:#EA3D4F;
+}
+
+#mainNav.navbar-shrink .nav-link:active{
+    color:#EA3D4F
+}
+
+#mainNav.navbar-shrink .nav-link.active{
+    color:#EA3D4F;
+    outline:0;
+    border-bottom:.25rem solid #EA3D4F}
+}
+
+#no{
+    width: 100%;
+    height: 800px;
+    background-image: url(../img/bg-about.jpg);
+}

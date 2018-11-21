@@ -85,7 +85,6 @@ class Preguntas extends CI_Controller { //autenticar
 		$justificaciones = $this->input ->post("justificacion2");
 		$opcion_correcta = $this->input ->post("correcta2");
 		$contador = 0;
-echo (count($opcione));
 		foreach ($opcione as $opcion) {
 			if($opcion!=""){
 				if($contador+1 == $opcion_correcta) $opcio['correcta']= "si";
@@ -128,7 +127,7 @@ echo (count($opcione));
 		}
 		$this->load->view('director/header');
 		$this->load->view('director/preguntas', $data);
-		$this->load->view('layouts/footer');
+		//$this->load->view('layouts/footer');
 	}
 
 	public function aprobar_pregunta(){//aprobar las preguntas realizadas por un docente
@@ -143,7 +142,7 @@ echo (count($opcione));
 		$data['tipo'] = "ver preguntas docente";
 		$data['preguntas']= $this-> Preguntas_model->getPreguntas($id);
 		$this->load->view('director/preguntas', $data);
-		$this->load->view('layouts/footer');
+	//	$this->load->view('layouts/footer');
 	}
 
 	public function ver_preguntas_area(){
@@ -155,7 +154,7 @@ echo (count($opcione));
 		$data['nombre_area'] = $this->Areas_model->getNombreArea($id_area);
 		$data['preguntas']= $this-> Preguntas_model->getPreguntasArea($id_area);
 		$this->load->view('director/preguntas', $data);
-		$this->load->view('layouts/footer');
+	//	$this->load->view('layouts/footer');
 	}
 
     //cargar vista creacionPregunta
@@ -165,7 +164,7 @@ echo (count($opcione));
 		
 		$data['est']= "creacion_pregunta";
 		$this->load->view('docente/preguntas/creacion_preguntas', $data);
-		$this->load->view('layouts/footer');
+	//	$this->load->view('layouts/footer');
 	}
 
 }

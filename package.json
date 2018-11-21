@@ -1,7 +1,0 @@
-{
-  "requires": true,
-  "lockfileVersion": 1,
-  "dependencies": {
-    "moment": "^2.22.2"
-  }
-}

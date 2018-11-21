@@ -179,7 +179,7 @@ break;
          <div id="cotenido_pag">
             <?php if ($preguntas) {?>
     <div class="table_">
-               <table  class="table table-hover">
+               <table class="table table-hover">
   <thead>
     <tr id="tit_table">
       <th scope="col"><center>Id</center></th>
@@ -340,7 +340,7 @@ break;
             </div>
              <div  class="form-group">
                 <center><label for="inputState">Ingresa las respuestas</label></center><br>
-
+                     
                      <div id="seleccionMultiple" style="display: block;">
                         <div id="contenido_opcion1">
                     <div id="opciones">
@@ -350,7 +350,7 @@ break;
               <input type="text" size="42" name="opcion[]" placeholder="Ingrese opcion">
               <input type="text" size="30" name="justificacion[]" placeholder="Ingrese justificación(opcional)">
               </div>
-              <a href="#" id="mas">Mas opciones</a> /
+              <a href="#" id="mas">Mas opciones</a> / 
               <a href="#" id="menos">Menos Opciones</a>
 
               <script type="text/javascript">
@@ -377,12 +377,13 @@ break;
 
              <input type="radio" name="correcta2" value="1"
               style="margin-right:15px;">
-              <input type="text" size="42" name="opcion2[]" value="verdadero">
+              ARREGLAR ERROR REGISTRO VF
+              <input type="text" size="42" name="opcion2[]" value="verdadero" disabled>
               <input type="text" size="30" name="justificacion2[]" placeholder="Ingrese justificación(opcional)">
 
          <input type="radio" name="correcta2" value="2"
               style="margin-right:15px;">
-              <input type="text" size="42" name="opcion2[]" value="Falso">
+              <input type="text" size="42" name="opcion2[]" value="Falso" disabled>
               <input type="text" size="30" name="justificacion2[]" placeholder="Ingrese justificación(opcional)">
 
     </div>
@@ -396,7 +397,8 @@ break;
         <input type="text" size="50" style= "display : none; " name="justificaciona" placeholder="Ingrese justificación(opcional)">
     </div>
     </div>
-        </div>
+
+                </div>
              <input type="submit" class="btn btn_reg_pre" value="Registrar">
                 </div>
             </div>
@@ -468,60 +470,15 @@ function contenido_preguntas(){
               document.getElementById('group_ques').removeChild(div.parentNode);
               i--;
           }
-
-    //Ajax agregar pregunta bd
-
-    $(document).ready( function() {
-
-        toastr.options = {
-  "closeButton": false,
-  "debug": false,
-  "newestOnTop": false,
-  "progressBar": false,
-  "positionClass": "toast-top-full-width",
-  "preventDuplicates": false,
-  "onclick": null,
-  "showDuration": "300",
-  "hideDuration": "1000",
-  "timeOut": "5000",
-  "extendedTimeOut": "1000",
-  "showEasing": "swing",
-  "hideEasing": "linear",
-  "showMethod": "fadeIn",
-  "hideMethod": "fadeOut"
-}
-
-            $('table').dataTable({
-                "dom": '<"top">rt<"bottom"p><"clear">',
-                responsive: true
-            });
-            
-            $('#formCrearPregunta').submit( function(e) {
-                $.ajax({
-                    url:  $(this).attr('action'),
-                    type:"POST",
-                    data: $(this).serialize(),
-                    success:function(resp){
-                     toastr.info('Pregunta Registrada exitosamente'+resp);
-                     //$("#enunciado").remove();
-                   //modificar elementos form
-            }
-        });
-                e.preventDefault();
-            });
-        });
-
     </script>
 
+   <!---------------------FIN RESPUESTAS DINAMICAS--------------------------->
+
     <!-- Plugin JavaScript -->
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
-  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
     <script src="<?php echo base_url(); ?>assets/template/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for this template -->
     <script src="<?php echo base_url(); ?>assets/template/js/grayscale.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    
 
 
    <!-- Bootstrap core JavaScript-------------------------------------------------- -->

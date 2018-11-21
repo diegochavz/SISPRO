@@ -20,6 +20,8 @@ class Perfil extends CI_Controller { //autenticar
 		$data['programa'] = $this-> Usuarios_model -> getProgramaNombre($v-> id_programa);
 		
 		$this->load->view('director/perfil', $data);
+		$this->load->view('layouts/footer');
+
 	}
 	}
 ?>

@@ -23,6 +23,9 @@ class Perfil extends CI_Controller {
 		$data['info'] = $v;
 		$data['programa'] = $this-> Usuarios_model -> getProgramaNombre($v-> id_programa);
 		$data['semestre'] = $this-> Usuarios_model -> getSemestre($id);
+		
 		$this->load->view('estudiante/perfil', $data);
+		$this->load->view('layouts/footer');
+
 	}
 }

@@ -257,12 +257,16 @@ public function cargarInfoPerfil($id, $rol){
 }
 
 public function getSemestre($id){
-    $this->db->select('*');
+    $this->db->select('nPeriodos');
     $this->db->from('estudiante');
+   
+    
     $this->db->where("id_user", $id);
-   return  $this-> db->get()->row()-> nPeriodos;
+    $resultados = $this-> db->get();
 
+    if($resultados->num_rows() > 0){
+    return $resultados->row();
+    }return false;
 }
 }
-
 ?>

@@ -1,7 +1,7 @@
  <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Simulacros extends CI_Controller {
+class Dashboard extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
@@ -15,7 +15,8 @@ class Simulacros extends CI_Controller {
 	public function index()
 	{
 		$this->load->view('estudiante/header');
-		$this->load->view('estudiante/perfil');
+		
+		$this->load->view('estudiante/dashboard');
 		$this->load->view('layouts/footer');
 
 	}
